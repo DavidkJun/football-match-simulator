@@ -21,14 +21,14 @@ class teamGenerator {
         while(Object.keys(team).length < 4) {
             let randId = Math.floor(Math.random() * 16)
             let randPlayer = this.players[randId]
-            if(this.checkIfTaken(randPlayer) === true) {
-                team[randPlayer] = "0";
+            if(this.checkIfFree(randPlayer) === true) {
+                team[randPlayer] = 0;
             }
         }
         return team;
     }
 
-    checkIfTaken(player) {
+    checkIfFree(player) {
         if(this.teamOne.hasOwnProperty(player) === false &&
             this.teamTwo.hasOwnProperty(player) === false &&
             this.teamThree.hasOwnProperty(player) === false &&
