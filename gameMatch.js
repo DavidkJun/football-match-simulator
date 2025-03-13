@@ -97,7 +97,7 @@ function checkTheDistance() {
 
 }
 
-function checkPassAcuracy() {
+function checkPassAccuracy() {
 
 }
 
