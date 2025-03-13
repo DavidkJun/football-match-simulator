@@ -24,7 +24,7 @@ function chooseTeams() {
         firstMatchTeam1 = prompt('Enter first team name for this match ')
     }
 
-    let firstMatchTeam2 = prompt('Enter second team name for this match')
+    let firstMatchTeam2 = prompt('Enter second team name for this match ')
     if(teamNames.includes(firstMatchTeam2)) {
         game1Teams.push(firstMatchTeam2)
     }else {
