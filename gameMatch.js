@@ -1,4 +1,4 @@
-const {team1,team2,team3,team4} = require('./sport_teams')
+/*const {team1,team2,team3,team4} = require('./sport_teams')
 const {firstMatchTeams} = require('./main')
 const {secondMatchTeams} = require('./main')
 const {team1Name,team2Name,team3Name,team4Name} = require("./sport_teams");
@@ -81,7 +81,9 @@ function takeTheBall(team) {
 
 action(1)
 
-function hit() {
+function hit(player) {
+    console.log(`Player ${player} performs a hit`);
+    checkTheDistance()
 
 }
 
@@ -93,8 +95,13 @@ function registerPoint() {
 
 }
 
-function checkTheDistance() {
+ */
 
+function checkTheDistance() {
+    let min = 3;
+    let max = 30;
+    let distance = Math.random() * (max-min) + min
+    return (Math.round(distance * 10) / 10);
 }
 
 function checkPassAccuracy() {
