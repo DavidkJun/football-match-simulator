@@ -56,6 +56,8 @@ function action(match) {
                 takeTheBall(getMatchTeam(firstMatchTeams[randTeamId], 1));
                 isBallTaken = true;
                 break
+            }else {
+                //perform hit or pass
             }
 
         case 2:
@@ -63,6 +65,8 @@ function action(match) {
                 takeTheBall(getMatchTeam(secondMatchTeams[randTeamId], 2));
                 isBallTaken = true;
                 break;
+            }else {
+                //perform hit or pass
             }
     }
 }
@@ -89,6 +93,10 @@ function registerPoint() {
 }
 
 function checkTheDistance() {
+
+}
+
+function checkPassAcuracy() {
 
 }
 
