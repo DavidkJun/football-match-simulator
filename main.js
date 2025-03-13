@@ -36,7 +36,8 @@ function chooseTeams() {
 
 }
 
+
 initalizeGame()
 
-module.exports.firstMathTeams = game1Teams
+module.exports.firstMatchTeams = game1Teams
 
