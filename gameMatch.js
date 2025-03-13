@@ -7,7 +7,7 @@ let teamNames = [team1Name, team2Name, team3Name,team4Name]
 
 let actionsAray = [
     takeTheBall,
-    makePass,
+    pass,
     hit
 ];
 
@@ -76,6 +76,7 @@ function takeTheBall(team) {
     let playersArr = Object.keys(team)
     //team is an object and we need to acces key by id
     console.log(`Player ${playersArr[randPlayerId]} takes the ball`)
+    return playersArr[randPlayerId]
 }
 
 action(1)
@@ -84,7 +85,7 @@ function hit() {
 
 }
 
-function makePass() {
+function pass() {
 
 }
 
