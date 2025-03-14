@@ -37,9 +37,9 @@ function getMatchTeam(teamName, match) {
                         return team3;
                     }else {
                         return team4;
+                    }
                 }
             }
-        }
     }
 }
 
@@ -49,22 +49,23 @@ function action(match) {
 
     switch (match) {
         case 1:
-            if(isBallTaken === false){// ball is not taken
+            if(isBallTaken === false){
                 let randTeam= firstMatchTeams[randTeamId];
                 takeTheBall(getMatchTeam(randTeam, 1));
                 isBallTaken = true;
 
             }else {
-                hitOrPass(currentHolder,getMatchTeam(currentHolder));
+                hitOrPass(currentHolder,getPlayersTeam(currentHolder));
             }
 
         case 2:
             if(isBallTaken === false){
-                takeTheBall(getMatchTeam(secondMatchTeams[randTeamId], 2));
+                let randTeam= secondMatchTeams[randTeamId];
+                takeTheBall(getMatchTeam(randTeam, 2));
                 isBallTaken = true;
-                break;
+
             }else {
-                //perform hit or pass
+                hitOrPass(currentHolder,getPlayersTeam(currentHolder));
             }
     }
 }
@@ -83,7 +84,7 @@ action(1)
 action(1)
 action(1)
 
-function hit(player, team) { // problem with accesing player here
+function hit(player, team) {
     console.log(`${player} performs a hit`);
     let distance = checkTheDistance()
     console.log(`Player hit the ball from distance of ${distance} meters`)
@@ -107,8 +108,9 @@ function hitOrPass(player, team) {
     hit(player,team)
 }
 
-function registerPoint(team, player) {
+function registerPoint(player, team) {
     team[player] ++;
+    console.log(team)
 }
 
 function checkTheDistance() {
@@ -121,7 +123,7 @@ function checkTheDistance() {
 function checkIfGoal() {
 
     let randNum = Math.random() * 5;
-    if(randNum < 2) {
+    if(randNum < 3) {
         return true;
     }else return false;
 }
