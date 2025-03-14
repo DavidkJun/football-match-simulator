@@ -1,15 +1,12 @@
-/*const {team1,team2,team3,team4} = require('./sport_teams')
+const {team1,team2,team3,team4} = require('./sport_teams')
 const {firstMatchTeams} = require('./main')
 const {secondMatchTeams} = require('./main')
 const {team1Name,team2Name,team3Name,team4Name} = require("./sport_teams");
 
 let teamNames = [team1Name, team2Name, team3Name,team4Name]
 
-let actionsAray = [
-    takeTheBall,
-    pass,
-    hit
-];
+
+let currentHolder = '';
 
 let isBallTaken = false;
 
@@ -40,9 +37,9 @@ function getMatchTeam(teamName, match) {
                         return team3;
                     }else {
                         return team4;
-                    }
                 }
             }
+        }
     }
 }
 
@@ -52,12 +49,13 @@ function action(match) {
 
     switch (match) {
         case 1:
-            if(isBallTaken === false){
-                takeTheBall(getMatchTeam(firstMatchTeams[randTeamId], 1));
+            if(isBallTaken === false){// ball is not taken
+                let randTeam= firstMatchTeams[randTeamId];
+                takeTheBall(getMatchTeam(randTeam, 1));
                 isBallTaken = true;
-                break
+
             }else {
-                //perform hit or pass
+                hitOrPass(currentHolder,getMatchTeam(currentHolder));
             }
 
         case 2:
@@ -74,34 +72,70 @@ function action(match) {
 function takeTheBall(team) {
     let randPlayerId = Math.floor(Math.random() * 4)
     let playersArr = Object.keys(team)
-    //team is an object and we need to acces key by id
-    console.log(`Player ${playersArr[randPlayerId]} takes the ball`)
+    console.log(`${playersArr[randPlayerId]} takes the ball`)
+    currentHolder = playersArr[randPlayerId];
     return playersArr[randPlayerId]
 }
 
 action(1)
+action(1)
+action(1)
+action(1)
+action(1)
 
-function hit(player) {
-    console.log(`Player ${player} performs a hit`);
-    checkTheDistance()
+function hit(player, team) { // problem with accesing player here
+    console.log(`${player} performs a hit`);
+    let distance = checkTheDistance()
+    console.log(`Player hit the ball from distance of ${distance} meters`)
+
+    if(checkIfGoal()) {
+        console.log(`${player} scored a goal`);
+        registerPoint(player, team)
+        isBallTaken = false;
+    }else {
+        console.log(`${player} missed a goal`)
+        isBallTaken = false;
+    }
+}
+
+function pass(player, team) {
 
 }
 
-function pass() {
-
+function hitOrPass(player, team) {
+    console.log()
+    hit(player,team)
 }
 
-function registerPoint() {
-
+function registerPoint(team, player) {
+    team[player] ++;
 }
-
- */
 
 function checkTheDistance() {
     let min = 3;
     let max = 30;
     let distance = Math.random() * (max-min) + min
     return (Math.round(distance * 10) / 10);
+}
+
+function checkIfGoal() {
+
+    let randNum = Math.random() * 5;
+    if(randNum < 2) {
+        return true;
+    }else return false;
+}
+
+function getPlayersTeam(player) {
+    if (player in team1) {
+        return team1;
+    }else if(player in team2 ) {
+        return team2;
+    }else if(player in team3){
+        return team3;
+    }else {
+        return team4;
+    }
 }
 
 function checkPassAccuracy() {
