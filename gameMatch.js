@@ -70,7 +70,7 @@ function action(match) {
     }
 }
 
-function takeTheBall(team) {
+function takeTheBall(team) { // add id statement to check for curent holder
     let randPlayerId = Math.floor(Math.random() * 4)
     let playersArr = Object.keys(team)
     console.log(`${playersArr[randPlayerId]} takes the ball`)
@@ -78,11 +78,6 @@ function takeTheBall(team) {
     return playersArr[randPlayerId]
 }
 
-action(1)
-action(1)
-action(1)
-action(1)
-action(1)
 
 function hit(player, team) {
     console.log(`${player} performs a hit`);
@@ -99,8 +94,8 @@ function hit(player, team) {
     }
 }
 
-function pass(player, team) {
-
+function pass(player) {
+    let team = getPlayersTeam(player);
 }
 
 function hitOrPass(player, team) {
@@ -155,3 +150,9 @@ function checkMvp() {
 function checkMatchResults() {
 
 }
+
+action(1)
+action(1)
+action(1)
+action(1)
+action(1)
