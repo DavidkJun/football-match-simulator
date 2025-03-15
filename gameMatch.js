@@ -44,14 +44,12 @@ function getMatchTeam(teamName, match) {
 }
 
 function action(match) {
-    let randActionId = Math.floor(Math.random() * 3)
     let randTeamId = Math.floor(Math.random() * 2);
-
     switch (match) {
         case 1:
             if(isBallTaken === false){
                 let randTeam= firstMatchTeams[randTeamId];
-                takeTheBall(getMatchTeam(randTeam, 1));
+                takeTheBall(getMatchTeam(randTeam, 1), 1);
                 isBallTaken = true;
 
             }else {
@@ -61,7 +59,7 @@ function action(match) {
         case 2:
             if(isBallTaken === false){
                 let randTeam= secondMatchTeams[randTeamId];
-                takeTheBall(getMatchTeam(randTeam, 2));
+                takeTheBall(getMatchTeam(randTeam, 2), 2);
                 isBallTaken = true;
 
             }else {
@@ -70,12 +68,17 @@ function action(match) {
     }
 }
 
-function takeTheBall(team) { // add id statement to check for curent holder
+function takeTheBall(team,match) { // add id statement to check for curent holder
     let randPlayerId = Math.floor(Math.random() * 4)
     let playersArr = Object.keys(team)
-    console.log(`${playersArr[randPlayerId]} takes the ball`)
-    currentHolder = playersArr[randPlayerId];
-    return playersArr[randPlayerId]
+    let randPlayer = playersArr[randPlayerId];
+    if(randPlayer !== currentHolder) {
+        console.log(`${randPlayer} takes the ball`)
+        currentHolder = randPlayer;
+        return randPlayer;
+    }else {
+        action(match);
+    }
 }
 
 
@@ -118,7 +121,7 @@ function checkTheDistance() {
 function checkIfGoal() {
 
     let randNum = Math.random() * 5;
-    if(randNum < 3) {
+    if(randNum < 2) {
         return true;
     }else return false;
 }
