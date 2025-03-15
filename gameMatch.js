@@ -53,7 +53,7 @@ function action(match) {
                 isBallTaken = true;
 
             }else {
-                hitOrPass(currentHolder,getPlayersTeam(currentHolder));
+                hitOrPass(currentHolder,getPlayersTeam(currentHolder), 1);
             }
 
         case 2:
@@ -63,12 +63,12 @@ function action(match) {
                 isBallTaken = true;
 
             }else {
-                hitOrPass(currentHolder,getPlayersTeam(currentHolder));
+                hitOrPass(currentHolder,getPlayersTeam(currentHolder), 2);
             }
     }
 }
 
-function takeTheBall(team,match) { // add id statement to check for curent holder
+function takeTheBall(team,match) {
     let randPlayerId = Math.floor(Math.random() * 4)
     let playersArr = Object.keys(team)
     let randPlayer = playersArr[randPlayerId];
@@ -97,13 +97,20 @@ function hit(player, team) {
     }
 }
 
-function pass(player) {
+function pass(player, match) {
     let team = getPlayersTeam(player);
+    console.log(`${player} makes a pass`);
+    takeTheBall(team, match)
 }
 
-function hitOrPass(player, team) {
-    console.log()
-    hit(player,team)
+function hitOrPass(player, team, match) {
+    let randNum = Math.random() * 5;
+
+    if(randNum < 2) {
+        hit(player,team)
+    }else {
+        pass(player,match)
+    }
 }
 
 function registerPoint(player, team) {
