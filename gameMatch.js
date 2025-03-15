@@ -83,9 +83,8 @@ function takeTheBall(team,match) {
 
 
 function hit(player, team) {
-    console.log(`${player} performs a hit`);
     let distance = checkTheDistance()
-    console.log(`Player hit the ball from distance of ${distance} meters`)
+    console.log(`${player} performs a hit from a distance of ${distance} meters`);
 
     if(checkIfGoal()) {
         console.log(`${player} scored a goal`);
