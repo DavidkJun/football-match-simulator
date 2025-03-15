@@ -3,12 +3,12 @@ const {firstMatchTeams} = require('./main')
 const {secondMatchTeams} = require('./main')
 const {team1Name,team2Name,team3Name,team4Name} = require("./sport_teams");
 
-let teamNames = [team1Name, team2Name, team3Name,team4Name]
-
-
 let currentHolder = '';
 
+let currentMatch = 1;
+
 let isBallTaken = false;
+
 
 function getMatchTeam(teamName, match) {
     switch (match) {
@@ -160,8 +160,15 @@ function checkMatchResults() {
 
 }
 
-action(1)
-action(1)
-action(1)
-action(1)
-action(1)
+function timedActions(numberOfActions, match) {
+    let minTime = 800;
+    let maxTime = 1500;
+    let randomTime = Math.random() * (maxTime - minTime) + minTime
+
+    while (numberOfActions > 1) {
+        setTimeout(() => {action(match)}, randomTime);
+        numberOfActions--;
+    }
+}
+
+module.exports.game1 = timedActions();
