@@ -2,6 +2,10 @@ let prompt = require('prompt-sync')();
 
 const players = require('./players')
 
+let game1Teams = [];
+let game2Teams = [];
+
+
 class teamGenerator {
     constructor(players) {
         this.players = players;
@@ -38,7 +42,7 @@ class teamGenerator {
             return false
         }
     }
-    displayTeams(firstTeam,secondTeam,thirdTeam,fourthTeam) {
+    displayTeams() {
         console.log("━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━")
         console.log(`First team: ${this.teamOneName}`)
         console.log( "" + Object.keys(this.teamOne))
@@ -57,6 +61,8 @@ class teamGenerator {
 
 const teams = new teamGenerator(players)
 
+let teamNames = [teams.teamOneName,teams.teamTwoName, teams.teamThreeName ,teams.teamFourName];
+
 function initializeTeams() {
 
       teams.generateTeams(teams.teamOne)
@@ -67,7 +73,40 @@ function initializeTeams() {
     teams.displayTeams()
 }
 
-module.exports.initializeTeams = initializeTeams();
+function chooseTeams() {
+
+    let firstMatchTeam1 = prompt('Enter first team name for this match ');
+
+    if(teamNames.includes(firstMatchTeam1)) {
+        game1Teams.push(firstMatchTeam1)
+    }else{
+        console.log('There is no team with such name')
+        firstMatchTeam1 = prompt('Enter first team name for this match ')
+    }
+
+    let firstMatchTeam2 = prompt('Enter second team name for this match ')
+    if(teamNames.includes(firstMatchTeam2)) {
+        game1Teams.push(firstMatchTeam2)
+    }else {
+        console.log('Please select team from the list')
+        firstMatchTeam2= prompt('Enter second team name for this match ');
+    }
+
+    for(let t of teamNames) {
+        if(game1Teams.includes(t) === false) {
+            game2Teams.push(t)
+        }
+    }
+
+    console.log(`First match teams are ${game1Teams[0]} and ${game1Teams[1]}`)
+    console.log(`Second match teams are ${game2Teams[0]} and ${game2Teams[1]}`)
+    console.log('LET THE GAME START!!!')
+
+}
+
+module.exports.chooseTeams = chooseTeams;
+
+module.exports.initializeTeams = initializeTeams;
 
 module.exports.team1Name = teams.teamOneName ;
 module.exports.team2Name = teams.teamTwoName;
@@ -78,3 +117,7 @@ module.exports.team1 = teams.teamOne ;
 module.exports.team2 = teams.teamTwo;
 module.exports.team3 = teams.teamThree;
 module.exports.team4 = teams.teamFour;
+
+module.exports.firstMatchTeams = game1Teams;
+module.exports.secondMatchTeams = game2Teams;
+
