@@ -13,8 +13,8 @@ let isBallTaken = false;
 function temporaryInit() {
     initializeTeams()
     chooseTeams()
-    timedActions(4,1)
-    //timedActions(4,2)
+    timedActions(6,1)
+    //timedActions(4,2) problem that when called two timed actions bugs occurs
 }
 
 function getMatchTeam(teamName, match) {
@@ -179,7 +179,5 @@ function timedActions(numberOfActions, match) {
         numberOfActions--;
     }
 }
-
-temporaryInit()
 
 module.exports.game = timedActions;

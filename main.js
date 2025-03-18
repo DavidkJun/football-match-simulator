@@ -1,12 +1,11 @@
 let prompt = require('prompt-sync')();
 const {game} = require("./gameMatch")
+const {initializeTeams, chooseTeams} = require("./sport_teams");
 
 function initalizeGame() {
-    let teamIntializer  = require('./sport_teams');
+    initializeTeams()
+    chooseTeams()
     game(6,1);
-    game(6, 2)
-
-
 }
 
 initalizeGame()
