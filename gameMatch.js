@@ -7,15 +7,10 @@ const {team1Name,team2Name,team3Name,team4Name} = require("./sport_teams");
 let {chooseTeams} = require('./sport_teams')
 let {initializeTeams} = require('./sport_teams');
 
+let isFirstEnded = false;
 let currentHolder = '';
 
 let isBallTaken = false;
-function temporaryInit() {
-    initializeTeams()
-    chooseTeams()
-    timedActions(6,1)
-    //timedActions(4,2) problem that when called two timed actions bugs occurs
-}
 
 function random(min, max) {
     return Math.random() * (max-min) + min
@@ -99,10 +94,12 @@ function hit(player, team) {
 
     if(checkIfGoal()) {
         console.log(`${player} scored a goal`);
+        console.log(' ')
         registerPoint(player, team)
         isBallTaken = false;
     }else {
         console.log(`${player} missed a goal`)
+        console.log(' ')
         isBallTaken = false;
     }
 }
@@ -110,6 +107,7 @@ function hit(player, team) {
 function pass(player, match) {
     let team = getPlayersTeam(player);
     console.log(`${player} makes a pass`);
+    console.log(' ')
     takeTheBall(team, match)
 }
 
@@ -174,13 +172,13 @@ function checkMatchResults() {
 function timedActions(numberOfActions, match) {
     let minTime = 800;
     let maxTime = 1500;
-    let randomTime = random(minTime,maxTime)
+    let randomTime = random(minTime, maxTime)
 
-    console.log(` Match ${match} started !!!`)
-
-    while (numberOfActions > 1) {
-        setTimeout(() => {action(match)}, randomTime);
-        numberOfActions--;
+    if (numberOfActions > 1) {
+        setTimeout(() => {
+            action(match)
+            timedActions(numberOfActions - 1, match)
+        }, randomTime);
     }
 }
 
