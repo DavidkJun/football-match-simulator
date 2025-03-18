@@ -17,6 +17,10 @@ function temporaryInit() {
     //timedActions(4,2) problem that when called two timed actions bugs occurs
 }
 
+function random(min, max) {
+    return Math.random() * (max-min) + min
+}
+
 function getMatchTeam(teamName, match) {
     switch (match) {
         case 1:
@@ -51,7 +55,7 @@ function getMatchTeam(teamName, match) {
 }
 
 function action(match) {
-    let randTeamId = Math.floor(Math.random() * 2);
+    let randTeamId = Math.floor(random(0,2));
     switch (match) {
         case 1:
             if(isBallTaken === false){
@@ -76,7 +80,7 @@ function action(match) {
 }
 
 function takeTheBall(team,match) {
-    let randPlayerId = Math.floor(Math.random() * 4)
+    let randPlayerId = Math.floor(random(0,4))
     let playersArr = Object.keys(team)
     let randPlayer = playersArr[randPlayerId];
     if(randPlayer !== currentHolder) {
@@ -110,7 +114,7 @@ function pass(player, match) {
 }
 
 function hitOrPass(player, team, match) {
-    let randNum = Math.random() * 5;
+    let randNum = random(0,5);
 
     if(randNum < 2) {
         hit(player,team)
@@ -127,13 +131,13 @@ function registerPoint(player, team) {
 function checkTheDistance() {
     let min = 3;
     let max = 30;
-    let distance = Math.random() * (max-min) + min
+    let distance = random(min, max);
     return (Math.round(distance * 10) / 10);
 }
 
 function checkIfGoal() {
 
-    let randNum = Math.random() * 5;
+    let randNum = random(0,5);
     if(randNum < 2) {
         return true;
     }else return false;
@@ -170,7 +174,7 @@ function checkMatchResults() {
 function timedActions(numberOfActions, match) {
     let minTime = 800;
     let maxTime = 1500;
-    let randomTime = Math.random() * (maxTime - minTime) + minTime
+    let randomTime = random(minTime,maxTime)
 
     console.log(` Match ${match} started !!!`)
 
